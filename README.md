@@ -1,5 +1,5 @@
 # JC.Unpacker :see_no_evil:
-Tool for extract ARC archives from game - [MELTY BLOOD: TYPE LUMINA](https://store.steampowered.com/app/6880/Just_Cause)
+Tool for extract ARC archives from game - [Just Cause](https://store.steampowered.com/app/6880/Just_Cause)
 
 | Game   | Steam   | SteamDB   |
 |---      |---    |---    |
