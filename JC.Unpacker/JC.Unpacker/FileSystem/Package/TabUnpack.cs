@@ -109,14 +109,19 @@ namespace JC.Unpacker
                     //Utils.iSetInfo("[DEBUG]: " + m_FileName + " , RawOffset: " + m_Entry.dwRawOffset.ToString("X8") + " , Offset: " + m_Entry.dwOffset.ToString("X8") + " , Size: " + m_Entry.dwSize + " , Archive ID: " + m_Entry.dwArchiveID.ToString());
 
                     Utils.iSetInfo("[UNPACKING]: " + m_FileName);
-                    Utils.iCreateDirectory(m_FullPath);
-
-                    using (FileStream TArcStream = File.OpenRead(Path.GetDirectoryName(m_TabFile) + @"\" + "pc" + m_Entry.dwArchiveID.ToString() + ".arc"))
+                    if (!File.Exists(m_FullPath))
                     {
-                        TArcStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
+                        Utils.iCreateDirectory(m_FullPath);
 
-                        var lpBuffer = TArcStream.ReadBytes(m_Entry.dwSize);
-                        File.WriteAllBytes(m_FullPath, lpBuffer);
+                        using (FileStream TArcStream = File.OpenRead(Path.GetDirectoryName(m_TabFile) + @"\" + "pc" + m_Entry.dwArchiveID.ToString() + ".arc"))
+                        {
+                            TArcStream.Seek(m_Entry.dwOffset, SeekOrigin.Begin);
+
+                            var lpBuffer = TArcStream.ReadBytes(m_Entry.dwSize);
+                            File.WriteAllBytes(m_FullPath, lpBuffer);
+
+                            TArcStream.Dispose();
+                        }
                     }
                 }
             }
